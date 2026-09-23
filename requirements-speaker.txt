@@ -1,0 +1,2 @@
+# Optional Task 2C local speaker-embedding backend (installs PyTorch transitively).
+speechbrain>=1.1,<2

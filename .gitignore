@@ -4,3 +4,5 @@ __pycache__/
 outputs/
 derived/
 .pytest_cache/
+samples/
+outputs/
