@@ -1,0 +1,2 @@
+# Optional Task 2E local WAV synthesis backend. Provide a Piper voice .onnx file separately.
+piper-tts>=1.8,<2

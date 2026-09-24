@@ -20,6 +20,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--instruction", help="Natural-language semantic delivery instruction")
     parser.add_argument("--generate-narration", action="store_true", help="Generate narration for document/presentation content")
     parser.add_argument("--rewrite-existing-speech", action="store_true", help="Explicitly allow narration generation for audio/video transcripts")
+    parser.add_argument("--enable-speech-analysis", action="store_true", help="Run Task 2 speech analysis (word alignment, prosody, speaker embedding)")
     parser.add_argument("--narration-mode", choices=("template", "api"), default="template")
     parser.add_argument("--instruction-mode", choices=("rule", "api"), default="rule")
     parser.add_argument("--asr-model", default="base", help="faster-whisper model name")
@@ -37,7 +38,7 @@ def main(argv: list[str] | None = None) -> int:
         narrator = ApiNarrationGenerator(backend) if args.narration_mode == "api" and backend else TemplateNarrationGenerator()
         instruction_parser = ApiInstructionParser(backend) if args.instruction_mode == "api" and backend else RuleBasedInstructionParser()
         pipeline = IngestionPipeline(
-            PipelineConfig(Path(args.output_dir), generate_narration=args.generate_narration, rewrite_existing_speech=args.rewrite_existing_speech),
+            PipelineConfig(Path(args.output_dir), generate_narration=args.generate_narration, rewrite_existing_speech=args.rewrite_existing_speech, enable_speech_analysis=args.enable_speech_analysis),
             transcriber=FasterWhisperTranscriber(args.asr_model, args.asr_device, args.asr_compute_type), narrator=narrator,
             instruction_parser=instruction_parser,
         )

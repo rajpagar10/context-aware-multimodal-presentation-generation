@@ -98,6 +98,21 @@ python main.py --input samples/deck.pptx --generate-narration --narration-mode a
 Each run writes `<output-dir>/normalized.json`. Video-derived WAV files are
 placed in `<output-dir>/derived/` and referenced under `artifacts`.
 
+## Browser demo
+
+Start the local demo server with:
+
+```powershell
+python demo.py
+```
+
+Then open `http://127.0.0.1:8765` in a browser. Choose a supported source file,
+select narration or Task 2 speech analysis, and run the pipeline. The page shows
+a summary of the extracted content and speech evidence, plus the normalized
+JSON with a download button. Demo inputs and results are saved under
+`outputs/browser_demo/`. The server listens on localhost only and uses the same
+pipeline CLI and optional dependencies described above.
+
 ## Output outline
 
 ```json
